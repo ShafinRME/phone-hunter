@@ -83,7 +83,43 @@ const disPlayPhoneDetail = phone => {
     phoneDetails.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
-    div.innerHTML = `
+    let relsd = `${phone.releaseDate}`;
+    if (relsd == '') {
+        div.innerHTML = `
+    <img class="w-50 mx-auto my-4" src="${phone.image}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Brand: ${phone.brand}</h5>
+                <p class="card-text">Realease Date: Not Released! </p>
+                <h6 class="text-center">Features</h6>
+                <ul>
+                <li>Display Size:${phone.mainFeatures.displaySize}</li>
+                <li>Memory: ${phone.mainFeatures.memory}</li>
+                <li>Storage: ${phone.mainFeatures.storage}</li>
+                <li>Sensors:
+                <ul>
+                <li>${phone.mainFeatures.sensors[0]}</li>
+                <li>${phone.mainFeatures.sensors[1]}</li>
+                <li>${phone.mainFeatures.sensors[2]}</li>
+                <li>${phone.mainFeatures.sensors[3]}</li>
+                </ul>
+                </ul>
+                <h6 class="text-center">Others</h6>
+                <ul>
+                <li>Bluetooth: ${phone.others.Bluetooth}</li>
+                <li>GPS: ${phone.others.GPS}</li>
+                <li>NFC: ${phone.others.NFC}</li>
+                <li>Radio: ${phone.others.Radio}</li>
+                <li>USB: ${phone.others.USB}</li>
+                <li>WLAN: ${phone.others.WLAN}</li>
+                </ul>
+
+            </div>
+    
+    `;
+        phoneDetails.appendChild(div);
+    }
+    else {
+        div.innerHTML = `
     <img class="w-50 mx-auto my-4" src="${phone.image}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Brand: ${phone.brand}</h5>
@@ -114,5 +150,7 @@ const disPlayPhoneDetail = phone => {
             </div>
     
     `;
-    phoneDetails.appendChild(div);
+        phoneDetails.appendChild(div);
+    }
+
 }
