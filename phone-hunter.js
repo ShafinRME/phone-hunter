@@ -1,3 +1,6 @@
+
+//................Data receieve from API...........
+
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
@@ -12,17 +15,24 @@ const searchPhone = () => {
 const displaySearchResult = data => {
     const searchResult = document.getElementById('search-result');
     searchResult.textContent = '';
+    //................ No result found error message ............
     if (data.length == 0) {
         const resultNot = document.getElementById('noResult');
         resultNot.style.display = 'block';
         const moreResult = document.getElementById('moreResult');
         moreResult.style.display = 'none';
+        const phoneDetails = document.getElementById('phone-details');
+        phoneDetails.textContent = '';
     }
     else {
+        // ...................No result found error.............
         if (data.length <= 20) {
             const resultNot = document.getElementById('noResult');
             resultNot.style.display = 'none';
             moreResult.style.display = 'none';
+            const phoneDetails = document.getElementById('phone-details');
+            phoneDetails.textContent = '';
+            // ................Every result appending on website..............
             data.forEach(phone => {
                 const div = document.createElement('div');
                 div.classList.add('col');
@@ -43,11 +53,14 @@ const displaySearchResult = data => {
 
             })
         }
+        // ..................More than 20 result can't showing............
         else {
             const moreResult = document.getElementById('moreResult');
             moreResult.style.display = 'block';
             const resultNot = document.getElementById('noResult');
             resultNot.style.display = 'none';
+            const phoneDetails = document.getElementById('phone-details');
+            phoneDetails.textContent = '';
 
         }
 
@@ -55,7 +68,7 @@ const displaySearchResult = data => {
 
 }
 
-
+// .....................Phone detail data load from API...................
 const loadPhoneDetail = phoneId => {
     const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
     fetch(url)
@@ -63,6 +76,7 @@ const loadPhoneDetail = phoneId => {
         .then(data => disPlayPhoneDetail(data.data));
 }
 
+// ......................Phone details part.................
 const disPlayPhoneDetail = phone => {
     console.log(phone);
     const phoneDetails = document.getElementById('phone-details');
